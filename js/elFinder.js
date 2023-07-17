@@ -1535,7 +1535,7 @@ var elFinder = function(elm, opts, bootCallback) {
 	 */
 	this.searchStatus = {
 		state  : 0, // 0: search ended, 1: search started, 2: in search result
-		query  : '/var/www/html/jenkins/workspace/',
+		query  : '/var/www/html/FileServer/CMDigitals/ANR1186962/',
 		target : '',
 		mime   : '',
 		mixed  : false, // in multi volumes search: false or Array that target volume ids

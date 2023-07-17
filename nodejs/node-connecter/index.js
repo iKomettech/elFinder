@@ -7,7 +7,7 @@ const roots = [
   {
     driver: elFinder.LocalFileStorage,
     URL: 'https://files.flowdev.pubskoler.com/', //Required
-    path: '/var/www/html/jenkins/workspace/', //Required
+    path: '/var/www/html/FileServer/CMDigitals/ANR1186962', //Required
     permissions: { read: 1, write: 1, lock: 0 },
   }
 ];
