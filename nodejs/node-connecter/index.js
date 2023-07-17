@@ -6,16 +6,10 @@ var cors = require('cors')
 const roots = [
   {
     driver: elFinder.LocalFileStorage,
-    URL: '/uploads/', //Required
-    path: '/path/to/dir', //Required
+    URL: 'https://files.flowdev.pubskoler.com/', //Required
+    path: '/var/www/html/jenkins/workspace/', //Required
     permissions: { read: 1, write: 1, lock: 0 },
-  },
-  {
-    driver: elFinder.LocalFileStorage,
-    URL: '/404/', //Required
-    path: 'private', //Required
-    permissions: { read: 1, write: 0, lock: 1 },
-  },
+  }
 ];
 
 const corsOpts = {
