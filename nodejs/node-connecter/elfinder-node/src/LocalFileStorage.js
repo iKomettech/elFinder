@@ -164,7 +164,7 @@ api.open = async function (opts, res) {
   target = helpers.decode(target);
   const dirExists = await fs.exists(target.absolutePath);
   if (!dirExists) target = helpers.decode(encodedRoot);
-
+  console.log(target.absolutePath)
   let files = (await fs.readdir(target.absolutePath).catch(console.log)) || [];
   const tasks = files.map(async (file) =>
     helpers.info(path.join(target.absolutePath, file))
