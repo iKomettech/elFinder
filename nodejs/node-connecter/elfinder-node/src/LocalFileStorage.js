@@ -416,8 +416,9 @@ api.tmb = function (opts, res) {
 api.tree = async function (opts, res) {
   if (!opts.target) throw new Error('errCmdParams');
   const dir = helpers.decode(opts.target);
+  console.log(dir);
   const files = await helpers.readdir(dir.absolutePath);
-
+  console.log(files);
   const tasks = files.map(async (file) => {
     if (file.isdir) {
       return helpers.info(path.join(dir.absolutePath, file.name));
