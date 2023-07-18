@@ -419,18 +419,21 @@ api.tree = async function (opts, res) {
   console.log(dir);
   const files = await helpers.readdir(dir.absolutePath);
   console.log(files);
-  var tree =[] 
-  files.map(async (file) => {
-    console.log(file);
-    console.log(file.isdir);
-    console.log(path.join(dir.absolutePath, file.name));
+  const tasks = files.map(async (file) => {
     if (file.isdir) {
-      console.log(await helpers.info(path.join(dir.absolutePath, file.name)));
-      tree.push(await helpers.info(path.join(dir.absolutePath, file.name)));
+      return helpers.info(path.join(dir.absolutePath, file.name));
     }
   });
- console.log(tree);
-  return { tree };
+  var tree=[]
+  return new promise(function (resolve, reject) {
+
+     tree = Promise.all(tasks).then((res) => {
+     
+      resolve({ "tree" :res});
+    })
+
+  });
+
 };
 
 api.upload = async function (opts, res, _files) {

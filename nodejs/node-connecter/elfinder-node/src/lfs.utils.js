@@ -108,7 +108,7 @@ exports.filepath = function (volume, filename) {
   return path.join(config.volumes[volume], path.normalize(filename));
 };
 
-exports.info = function (p) {
+exports.info = async function (p) {
   return new promise(function (resolve, reject) {
     const info = exports.parse(p);
     if (info.volume < 0) return reject('Volume not found');
