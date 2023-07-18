@@ -169,8 +169,8 @@
 			$('#finder').elfinder({
 				// requestType : 'post',
 
-				// url : 'php/connector.php',
-				url : 'php/connector.php',
+				// url : 'http://localhost:8000/connecter',
+				url : 'http://localhost:8000/connecter',
 				// transport : new elFinderSupportVer1(),
 				// getFileCallback : function(files, fm) {
 				// 	console.log(files);
@@ -238,7 +238,7 @@
 			})
 
 			// $('#finder2').elfinder({
-			// 	url : 'connectors/php/connector.php',
+			// 	url : 'connectors/http://localhost:8000/connecter',
 			// 	width:650,
 			// 	lang : 'ru'
 			// })
@@ -252,7 +252,7 @@
 			// new elFinder($('<div/>'))
 
 			// var f2 = $('#asd').elfinder({
-			// 	url : 'connectors/php/connector.php',
+			// 	url : 'connectors/http://localhost:8000/connecter',
 			// 	lang : 'ru'
 			// }).elfinder('instance')
 			
@@ -265,7 +265,7 @@
 
 			$('#dialog').click(function() {
 				var fm = $('<div/>').dialogelfinder({
-					url : 'php/connector.php',
+					url : 'http://localhost:8000/connecter',
 					lang : 'en',
 					width : 840,
 					destroyOnClose : true,

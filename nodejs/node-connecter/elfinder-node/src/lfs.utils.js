@@ -1,4 +1,4 @@
-const base64 = require('base-64');
+const base64 = require('../../base-64');
 const path = require('path'); //Remove
 const mime = require('mime-types');
 const promise = require('promise');

@@ -1328,7 +1328,8 @@ var elFinder = function(elm, opts, bootCallback) {
 	
 	// configure for CORS
 	(function(){
-		/*if (typeof self.options.cors !== 'undefined' && self.options.cors !== null) {
+		self.isCORS=false;
+		if (typeof self.options.cors !== 'undefined' && self.options.cors !== null) {
 			self.isCORS = self.options.cors? true : false;
 		} else {
 			var parseUrl = document.createElement('a'),
@@ -1354,7 +1355,7 @@ var elFinder = function(elm, opts, bootCallback) {
 			) {
 				self.isCORS = true;
 			}
-		}*/
+		}
 		self.isCORS=false;
 		if (self.isCORS) {
 			if (!$.isPlainObject(self.options.customHeaders)) {
@@ -1535,7 +1536,7 @@ var elFinder = function(elm, opts, bootCallback) {
 	 */
 	this.searchStatus = {
 		state  : 0, // 0: search ended, 1: search started, 2: in search result
-		query  : '/var/www/html/FileServer/CMDigitals/ANR1186962/',
+		query  : '',
 		target : '',
 		mime   : '',
 		mixed  : false, // in multi volumes search: false or Array that target volume ids
