@@ -419,17 +419,17 @@ api.tree = async function (opts, res) {
   console.log(dir);
   const files = await helpers.readdir(dir.absolutePath);
   console.log(files);
-  const tasks = files.map(async (file) => {
+  var tree =[] 
+  files.map(async (file) => {
     console.log(file);
     console.log(file.isdir);
     console.log(path.join(dir.absolutePath, file.name));
     if (file.isdir) {
       console.log(await helpers.info(path.join(dir.absolutePath, file.name)));
-      return await helpers.info(path.join(dir.absolutePath, file.name));
+      tree.push(helpers.info(path.join(dir.absolutePath, file.name)));
     }
   });
-
-  const tree = Promise.all(tasks);
+ 
   return { tree };
 };
 
