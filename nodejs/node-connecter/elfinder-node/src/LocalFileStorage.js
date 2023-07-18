@@ -426,7 +426,7 @@ api.tree = async function (opts, res) {
     console.log(path.join(dir.absolutePath, file.name));
     if (file.isdir) {
       console.log(await helpers.info(path.join(dir.absolutePath, file.name)));
-      tree.push(helpers.info(path.join(dir.absolutePath, file.name)));
+      tree.push(await helpers.info(path.join(dir.absolutePath, file.name)));
     }
   });
  
