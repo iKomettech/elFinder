@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const elFinder = require('elfinder-node');
+const elFinder = require('./elfinder-node');
 var cors = require('cors')
 
 const roots = [
