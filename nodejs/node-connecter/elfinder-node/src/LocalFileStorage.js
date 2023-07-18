@@ -429,7 +429,7 @@ api.tree = async function (opts, res) {
       tree.push(await helpers.info(path.join(dir.absolutePath, file.name)));
     }
   });
- 
+ console.log(tree);
   return { tree };
 };
 
