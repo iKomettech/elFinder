@@ -5649,11 +5649,14 @@ var elFinder = function(elm, opts, bootCallback) {
 
 		// calculate elFinder node z-index
 		self.zIndexCalc();
-
+        
+        const { customData } = self.options;
+		let wo_path = customData?.wo_path ?? '';
+	
 		// send initial request and start to pray >_<
 		self.trigger('init')
 			.request({
-				data        : {cmd : 'open', target : self.startDir(), init : 1, tree : 1}, 
+				data        : {cmd : 'open', target : self.startDir(), init : 1, tree : 1, wo_path:wo_path}, 
 				preventDone : true,
 				notify      : {type : 'open', cnt : 1, hideCnt : true},
 				freeze      : true

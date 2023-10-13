@@ -25,6 +25,10 @@ module.exports = function (roots) {
 
   router.get('/', async function (req, res) {
     const cmd = req.query.cmd;
+    if (req.query.wo_path) {
+      LFS({ volumes: [req.query.wo_path] });
+    }
+    
     try {
       if (!connector[cmd]) throw notImplementedError(cmd);
       const result = await connector[cmd](req.query, res);
@@ -37,6 +41,11 @@ module.exports = function (roots) {
 
   router.post('/', async function (req, res) {
     const cmd = req.body.cmd;
+    
+    if (req.body.wo_path) {
+      LFS({ volumes: [req.body.wo_path] });
+    }
+  
     try {
       if (!connector[cmd]) throw notImplementedError(cmd);
       const result = await connector[cmd](

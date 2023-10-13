@@ -88,7 +88,7 @@
 		var doOpen = function() {
 			var openCB = function(url) {
 					var link = $('<a rel="noopener">').hide().appendTo($('body'));
-					if (fm.UA.Mobile || !inline) {
+					/*if (fm.UA.Mobile || !inline) {
 						if (html5dl) {
 							if (!inline) {
 								link.attr('download', file.name);
@@ -174,7 +174,10 @@
 							wnd.location = url;
 						}
 						$(wnd).trigger('focus');
-					}
+					}*/
+					
+					link.attr('target', '_blank');
+					link.attr('href', url).get(0).click();
 					link.remove();
 				},
 				wnd, target, getOnly;

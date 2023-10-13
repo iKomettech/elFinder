@@ -126,62 +126,63 @@
 
 	<!-- elfinder initialization  -->
 	<script>
-		$(function() {
-			$('#elfinder').elfinder(
-				// 1st Arg - options
-				{
-					// Disable CSS auto loading
-					cssAutoLoad : false,
+		function form_basepath(){
+			const getURL = window.location.href.split('.');
 
-					// Base URL to css/*, js/*
-					baseUrl : './',
+			let env = 'dev';
+			if (getURL[0].indexOf('flowdev') >= 0) {
+				env = 'flowdev';
+			}else if (getURL[0].indexOf('ikomet') >= 0) {
+	    		env = 'ikomet';
+			}
+			let httpLink = "http://";
 
-					// Connector URL
-					url : 'http://192.168.1.3:8000/connector',
+			if (getURL.indexOf("https://") != -1) {
+				httpLink = "https://";
+			}
 
-					// Callback when a file is double-clicked
-					getFileCallback : function(file) {
-						// ...
-					},
-					isCORS:false
-				},
-				
-				// 2nd Arg - before boot up function
-				function(fm, extraObj) {
-					// `init` event callback function
-					fm.bind('init', function() {
-						// Optional for Japanese decoder "extras/encoding-japanese.min"
-						delete fm.options.rawStringDecoder;
-						if (fm.lang === 'ja') {
-							fm.loadScript(
-								[ fm.baseUrl + 'js/extras/encoding-japanese.min.js' ],
-								function() {
-									if (window.Encoding && Encoding.convert) {
-										fm.options.rawStringDecoder = function(s) {
-											return Encoding.convert(s,{to:'UNICODE',type:'string'});
-										};
-									}
-								},
-								{ loadType: 'tag' }
-							);
-						}
-					});
-					
-					// Optional for set document.title dynamically.
-					var title = document.title;
-					fm.bind('open', function() {
-						var path = '',
-							cwd  = fm.cwd();
-						if (cwd) {
-							path = fm.path(cwd.hash) || null;
-						}
-						document.title = path? path + ':' + title : title;
-					}).bind('destroy', function() {
-						document.title = title;
-					});
-				}
-			);
-		});
+			let domainname=(env!="ikomet")? "."+ env +".pubskoler.com":".pubskoler.com";
+			return  {
+				fileserverpath : httpLink + "files" +domainname,
+				nodeconnectorpath : httpLink + "nodeconnector" +domainname
+			};
+		}
+
+	    $(document).ready(function() {
+		
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const projectName = urlParams.get('projectName') || 'CMDigitals';
+			const subProjectName = urlParams.get('subProjectName') || '';
+			const fileName = urlParams.get('fileName') || 'HHCMP1183094';
+		     
+			/*const fileserverpath = form_basepath().fileserverpath;
+		    const elfinder_nodepath  = form_basepath().nodeconnectorpath;*/
+			
+    
+			const basepath = '/home/sysadmin/Desktop/elfinder_upload/FlowskolerDev/' 
+			const wo_path = basepath
+				+ projectName+'/'
+				+ (subProjectName ? subProjectName+'/'+fileName:fileName)
+		
+			const connectorUrl = `http://localhost:8000/connector`;
+           
+			const formData = new FormData();
+			formData['wo_path'] =wo_path;
+			
+
+			let elfinderOptions = {
+				height: '100%',
+				cssAutoLoad: false,
+				url: connectorUrl,
+				customData: formData, 
+				getFileCallback : function(file) {},
+				isCORS:false,
+				requestType: 'POST'
+			};
+
+			$('#elfinder').elfinder(elfinderOptions); 
+      });
 	</script>
 </head>
 <body>
