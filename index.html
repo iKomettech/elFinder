@@ -126,42 +126,17 @@
 
 	<!-- elfinder initialization  -->
 	<script>
-		function form_basepath(){
-			const getURL = window.location.href.split('.');
-
-			let env = 'dev';
-			if (getURL[0].indexOf('flowdev') >= 0) {
-				env = 'flowdev';
-			}else if (getURL[0].indexOf('ikomet') >= 0) {
-	    		env = 'ikomet';
-			}
-			let httpLink = "http://";
-
-			if (getURL.indexOf("https://") != -1) {
-				httpLink = "https://";
-			}
-
-			let domainname=(env!="ikomet")? "."+ env +".pubskoler.com":".pubskoler.com";
-			return  {
-				fileserverpath : httpLink + "files" +domainname,
-				nodeconnectorpath : httpLink + "nodeconnector" +domainname
-			};
-		}
 
 	    $(document).ready(function() {
 		
 			const queryString = window.location.search;
 			const urlParams = new URLSearchParams(queryString);
-			const projectName = urlParams.get('projectName') || 'CMDigitals';
+			const projectName = urlParams.get('projectName') || '';
 			const subProjectName = urlParams.get('subProjectName') || '';
-			const fileName = urlParams.get('fileName') || 'HHCMP1183094';
-		     
-			/*const fileserverpath = form_basepath().fileserverpath;
-		    const elfinder_nodepath  = form_basepath().nodeconnectorpath;*/
-			
-    
-			const basepath = '/home/sysadmin/Desktop/elfinder_upload/FlowskolerDev/' 
-			const wo_path = basepath
+			const fileName = urlParams.get('fileName') || '';
+		 
+			const fileserverpath = "/var/www/html/CobeFileServer/FlowskolerDev"
+			const wo_path = fileserverpath+'/'
 				+ projectName+'/'
 				+ (subProjectName ? subProjectName+'/'+fileName:fileName)
 		
@@ -170,7 +145,6 @@
 			const formData = new FormData();
 			formData['wo_path'] =wo_path;
 			
-
 			let elfinderOptions = {
 				height: '100%',
 				cssAutoLoad: false,
