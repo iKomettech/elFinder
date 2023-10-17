@@ -123,6 +123,7 @@
 
 	<!-- GoogleDocs Quicklook plugin for GoogleDrive Volume (OPTIONAL) -->
 	<script src="js/extras/quicklook.googledocs.js"></script>
+	<script src="js/config.js"></script>
 
 	<!-- elfinder initialization  -->
 	<script>
@@ -134,14 +135,15 @@
 			const projectName = urlParams.get('projectName') || '';
 			const subProjectName = urlParams.get('subProjectName') || '';
 			const fileName = urlParams.get('fileName') || '';
-		 
-			const fileserverpath = "/var/www/html/CobeFileServer/FlowskolerDev"
-			const wo_path = fileserverpath+'/'
+		   
+			const config = getConfig(); 
+
+			const fileserverpath = config.fileserverpath;
+			let wo_path = fileserverpath+'/'
 				+ projectName+'/'
 				+ (subProjectName ? subProjectName+'/'+fileName:fileName)
 		
-			const connectorUrl = `http://localhost:8000/connector`;
-           
+            const connectorUrl = config.nodeconnectorpath;
 			const formData = new FormData();
 			formData['wo_path'] =wo_path;
 			

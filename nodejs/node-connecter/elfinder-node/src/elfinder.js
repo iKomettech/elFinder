@@ -22,7 +22,7 @@ module.exports = function (roots) {
   busboy.extend(router, {
     upload: true,
   });
-
+  
   router.get('/', async function (req, res) {
     const cmd = req.query.cmd;
     if (req.query.wo_path) {
@@ -53,6 +53,14 @@ module.exports = function (roots) {
         res,
         req.files?.['upload[]']
       );
+      // Logic to hide specific directories here; incase to display but deny read, write access- use same code but loop and add - file.read=0, file.write=0, file.locked=true
+      if(result){
+        const filesToBeHidden = ['Backups', 'Output', 'Logs', 'HTML', 'Validation', 'Text', 'ZipFiles', 'Equations'];
+        
+        if(result.files){
+          result.files = result.files.filter(file => !file || !filesToBeHidden.includes(file.name));
+        }
+      }
       if (result) res.json(result);
     } catch (e) {
       res.status(500).json({ error: e.message });
